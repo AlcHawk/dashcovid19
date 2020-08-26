@@ -195,6 +195,7 @@ fig_src.update_traces(marker_color='green', textposition='auto')
 #%%
 # Server
 app = dash.Dash(__name__)
+app.title = 'COVID-19 Information of TW'
 
 server = app.server
 
@@ -294,7 +295,7 @@ app.layout = html.Div(
             [
                 html.Div(
                     [
-                        html.Div([html.H1("Status Summary")], className="page-2a"),
+                        html.Div([html.H1("Status Summary (TW)")], className="page-2a"),
                         html.Div(
                             [   
                                 dcc.Graph(figure=fig_dayInc)
