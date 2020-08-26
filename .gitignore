@@ -9,3 +9,7 @@ Img
 *.csv
 Data/*.txt
 assets/*.png
+Procfile
+demo.py
+gsheet.py
+requirements_backup.txt
