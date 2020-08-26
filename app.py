@@ -24,21 +24,6 @@ DATA_PATH = BASE_PATH.joinpath("Data").resolve()
 
 #%%
 ## Read in data
-supplyDemand = pd.read_csv(DATA_PATH.joinpath("supplyDemand.csv"))
-actualSeasonal = pd.read_csv(DATA_PATH.joinpath("actualSeasonal.csv"))
-industrailProd = pd.read_csv(DATA_PATH.joinpath("industrailProd.csv"))
-globalMarket = pd.read_csv(DATA_PATH.joinpath("globalMarket.csv"))
-oecdCommersial = pd.read_csv(DATA_PATH.joinpath("oecdCommersial.csv"))
-wtiPrices = pd.read_csv(DATA_PATH.joinpath("wtiPrices.csv"))
-epxEquity = pd.read_csv(DATA_PATH.joinpath("epxEquity.csv"))
-chinaSpr = pd.read_csv(DATA_PATH.joinpath("chinaSpr.csv"))
-oecdIndustry = pd.read_csv(DATA_PATH.joinpath("oecdIndustry.csv"))
-wtiOilprices = pd.read_csv(DATA_PATH.joinpath("wtiOilprices.csv"))
-productionCost = pd.read_csv(DATA_PATH.joinpath("productionCost.csv"))
-production2015 = pd.read_csv(DATA_PATH.joinpath("production2015.csv"))
-energyShare = pd.read_csv(DATA_PATH.joinpath("energyShare.csv"))
-adjustedSales = pd.read_csv(DATA_PATH.joinpath("adjustedSales.csv"))
-growthGdp = pd.read_csv(DATA_PATH.joinpath("growthGdp.csv"))
 
 pressLst = pd.read_excel(DATA_PATH.joinpath(f"CDC_Press List.xlsx"), keep_default_na=False, infer_datetime_format=True)
 pressTDY = pressLst.loc[pressLst["YMD"] == pressLst.iloc[1, 2]]
