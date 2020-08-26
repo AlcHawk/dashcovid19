@@ -40,7 +40,7 @@ energyShare = pd.read_csv(DATA_PATH.joinpath("energyShare.csv"))
 adjustedSales = pd.read_csv(DATA_PATH.joinpath("adjustedSales.csv"))
 growthGdp = pd.read_csv(DATA_PATH.joinpath("growthGdp.csv"))
 
-pressLst = pd.read_excel(DATA_PATH.joinpath(f"CDC_Press List_{tdy}.xlsx"), keep_default_na=False, infer_datetime_format=True)
+pressLst = pd.read_excel(DATA_PATH.joinpath(f"CDC_Press List.xlsx"), keep_default_na=False, infer_datetime_format=True)
 pressTDY = pressLst.loc[pressLst["YMD"] == pressLst.iloc[1, 2]]
 
 cases = pd.read_excel(DATA_PATH.joinpath("COVID-19_TW.xlsx"), keep_default_na=False, parse_dates=[1], infer_datetime_format=True)

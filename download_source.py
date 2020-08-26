@@ -121,6 +121,6 @@ pressDF_m = pressDF_handle.merge(contentDF, left_index=True, right_index=True)
 pressDF_m["Page Content"] = list(map(lambda x: x.replace("\n\n", "\n").replace("\n", "\$\@\$"), pressDF_m["Page Content Raw"]))
 pressDF_m_ex = pressDF_m.drop(["Page Content Raw"], axis=1)
 
-pressDF_m_ex.to_excel(f"./Data/CDC_Press List_{tdy}.xlsx", sheet_name="Press", index=False)
+pressDF_m_ex.to_excel(f"./Data/CDC_Press List.xlsx", sheet_name="Press", index=False)
 
 # %%
