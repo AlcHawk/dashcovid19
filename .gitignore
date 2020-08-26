@@ -1,0 +1,11 @@
+venv
+*.pyc
+.DS_Store
+.env
+settings.json
+.vscode
+Example/
+Img
+*.csv
+Data/*.txt
+assets/*.png
