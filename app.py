@@ -56,8 +56,17 @@ color_b = "#F8F8FF"
 
 #%%
 
+paraLN = pressTDY.shape[0]
+paraGN = paraLN / 2
+
+if paraGN <= 1:
+    para1N = paraLN
+elif 1 < paraGN <= 2:
+    para1N = 2
+    para2N = int((paraGN - 1) * 2)
+
 paragLst = [html.H6("疫情指揮中心 最新新聞稿", className="page-1i"),]
-for pressN in range(pressTDY.shape[0]):
+for pressN in range(para1N):
     iniLst = [
         html.H6(
         pressTDY.iloc[pressN, 0],
@@ -74,6 +83,27 @@ for pressN in range(pressTDY.shape[0]):
         paragLst.extend( [html.Div(iniLst, className="page-1k", )] )
     else:
         paragLst.extend( [html.Div(iniLst, className="page-1l", )] )
+
+# Every 2 Press in one page
+if paraGN > 1 :
+    paragLst2 = []
+    for press2N in range(para1N, para1N + para2N):
+        iniLst2 = [
+            html.H6(
+            pressTDY.iloc[press2N, 0],
+            className="page-1h",
+            ),
+        ]
+        iniLst2.extend(
+            list(item if item != "\@" else html.Br() for item in
+                pressTDY.iloc[press2N, 4].split("\$")
+            )
+        )
+
+        if press2N % 2 == 1:
+            paragLst2.extend( [html.Div(iniLst2, className="page-1k", )] )
+        else:
+            paragLst2.extend( [html.Div(iniLst2, className="page-1l", )] )
 
 
 ## Figure
