@@ -26,7 +26,7 @@ DATA_PATH = BASE_PATH.joinpath("Data").resolve()
 ## Read in data
 
 pressLst = pd.read_excel(DATA_PATH.joinpath(f"CDC_Press List.xlsx"), keep_default_na=False, infer_datetime_format=True)
-pressTDY = pressLst.loc[pressLst["YMD"] == pressLst.iloc[1, 2]]
+pressTDY = pressLst.loc[pressLst["YMD"] == pressLst.iloc[0, 2]]
 
 cases = pd.read_excel(DATA_PATH.joinpath("COVID-19_TW.xlsx"), keep_default_na=False, parse_dates=[1], infer_datetime_format=True)
 cases_filter = cases.loc[cases["案例"] != ""]
