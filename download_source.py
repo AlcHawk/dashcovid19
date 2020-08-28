@@ -9,6 +9,12 @@ import xlsxwriter, xlrd
 
 import datetime
 import time
+import sys
+
+if len(sys.argv) > 1:
+    rootdir = sys.argv[1]
+else:
+    rootdir = "."
 
 tdy = time.strftime("%Y%m%d")
 
@@ -16,7 +22,7 @@ tdy = time.strftime("%Y%m%d")
 
 srcUrl = 'https://docs.google.com/spreadsheets/d/1qh20J-5rGVIEjLcGKJnfj7huAp-nCxsd-fJdmh3yZKY/export?gid=0&format=xlsx'
 
-out_fname = './Data/COVID-19_TW.xlsx'
+out_fname = f'{rootdir}/Data/COVID-19_TW.xlsx'
 
 res = requests.get(srcUrl)
 res.encoding = 'utf-8'
@@ -121,6 +127,6 @@ pressDF_m = pressDF_handle.merge(contentDF, left_index=True, right_index=True)
 pressDF_m["Page Content"] = list(map(lambda x: x.replace("\n\n", "\n").replace("\n", "\$\@\$"), pressDF_m["Page Content Raw"]))
 pressDF_m_ex = pressDF_m.drop(["Page Content Raw"], axis=1)
 
-pressDF_m_ex.to_excel(f"./Data/CDC_Press List.xlsx", sheet_name="Press", index=False)
+pressDF_m_ex.to_excel(f"{rootdir}/Data/CDC_Press List.xlsx", sheet_name="Press", index=False)
 
 # %%

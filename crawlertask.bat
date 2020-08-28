@@ -4,7 +4,7 @@ C:
 cd /
 cd %dashdir%
 call conda activate dashcovid19
-REM python download_source.py
+python download_source.py %dashdir%
 call conda deactivate
 
 set tdy=%date:~0, 4%%date:~5, 2%%date:~8, 2%
