@@ -10,5 +10,6 @@ Img
 Data/*.txt
 assets/*.png
 demo.py
+demo.bat
 gsheet.py
 requirements_backup.txt
