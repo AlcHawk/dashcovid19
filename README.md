@@ -1,7 +1,7 @@
 ## dash-multipage-report
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![made-with-plotly-dash](https://img.shields.io/badge/Made%20with-Plotly%20Dash-1f425f.svg)](https://plotly.com/dash/)
-[![GitHub Release](https://img.shields.io/github/release/alchawk/dashcovid19.svg?style=flat)]()  
+[![GitHub Release](https://img.shields.io/github/release/alchawk/dashcovid19.svg?style=flat)](https://github.com/AlcHawk/dashcovid19/tree/master)  
 
 [![dashcovid19 Downloads](https://img.shields.io/github/downloads/alchawk/dashcovid19/total.svg?maxAge=2592000?)]()
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/AlcHawk/dashcovid19/graphs/commit-activity)
