@@ -447,7 +447,13 @@ body {
   text-align: center;
 }
 
-.page-cus3 {
+.page-cus3-1 {
+  border-left: 30px;
+  margin-left: 80px;
+  margin-top: 10px;
+}
+
+.page-cus3-2 {
   border-left: 30px;
   margin-top: 20px;
 }

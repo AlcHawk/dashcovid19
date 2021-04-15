@@ -123,7 +123,7 @@ if paraGN > 1 :
 ## Set Figure style for the summary
 
 # Daily incidence trend of COVID-19 case in Taiwan
-fig_dayInc_scale = 150
+fig_dayInc_scale = 165
 fig_dayInc = px.line(
             caseDayDS_Melt,
             x="日期", y="人次",
@@ -136,7 +136,7 @@ fig_dayInc = px.line(
                     'xanchor': 'center',
                     'yanchor': 'top'
                 },
-            # width= 4*fig_dayInc_scale, height= 3*fig_dayInc_scale
+            width= 4*fig_dayInc_scale, height= 3*fig_dayInc_scale
             )
 fig_dayInc.update_xaxes(
     showgrid=True,
@@ -164,7 +164,7 @@ fig_dayInc.update_layout(
 # fig_dayInc.show()
 
 # Histogram of COVID-19 case in Taiwan
-fig_src_scale = 100
+fig_src_scale = 90
 fig_src = px.bar(
             caseTDS,
             x="來源", y="人次",
@@ -194,7 +194,8 @@ fig_VCAP_OxAZ = px.sunburst(
             values='Total',
             title={
                     'text': "AZ COVID Vaccine AEs - SOC/PT/Reaction Name"
-                }
+                },
+            height=560
             )
 
 # fig_VCAP_OxAZ.show()
@@ -318,7 +319,7 @@ app.layout = html.Div(
                                 # ),
                                 dcc.Graph(figure=fig_src)
                             ],
-                            className="page-cus3",
+                            className="page-cus3-1",
                         ),
                     ],
                     className="subpage",
@@ -337,7 +338,7 @@ app.layout = html.Div(
                             [   
                                 dcc.Graph(figure=fig_VCAP_OxAZ)
                             ],
-                            className="page-cus3",
+                            className="page-cus3-2",
                         ),
                     ],
                     className="subpage-cus",
