@@ -51,6 +51,10 @@ caseDayDS_Melt["Subject"][caseDayDS_Melt["Subject"] == "人次"] = "新增人次
 
 sumCOVID19_TW = sum(caseTDS["人次"])
 
+# Vaccine Analysis Print of Oxford University/AstraZeneca
+VCAP_AZ = pd.read_excel(DATA_PATH.joinpath("VaccineAnalysisPrint.xlsx"), sheet_name="OxAstraZeneca",keep_default_na=False, parse_dates=[1], infer_datetime_format=True)
+
+
 # Set Colour Parameters
 color_1 = "#003399"
 color_2 = "#00ffff"
@@ -182,6 +186,19 @@ fig_src.layout.font = dict(family="Helvetica")
 # fig.update_traces(marker_color=color_1)
 fig_src.update_traces(marker_color='green', textposition='auto')
 
+# Summary for Vaccine Analysis Print - Oxford/AZ
+
+fig_VCAP_OxAZ = px.sunburst(
+            VCAP_AZ,
+            path=['SOC', 'PT', 'Reaction Name'],
+            values='Total',
+            title={
+                    'text': "AZ COVID Vaccine AEs - SOC/PT/Reaction Name"
+                }
+            )
+
+# fig_VCAP_OxAZ.show()
+
 
 #%%
 # Server
@@ -301,10 +318,29 @@ app.layout = html.Div(
                                 # ),
                                 dcc.Graph(figure=fig_src)
                             ],
-                            className="page-cus1a",
+                            className="page-cus3",
                         ),
                     ],
                     className="subpage",
+                )
+            ],
+            className="page",
+        ),
+
+        # Page 3
+        html.Div(
+            [
+                html.Div(
+                    [
+                        html.Div([html.H1("Vaccine Analysis Print - Ox/AZ")], className="page-cus2a"),
+                        html.Div(
+                            [   
+                                dcc.Graph(figure=fig_VCAP_OxAZ)
+                            ],
+                            className="page-cus3",
+                        ),
+                    ],
+                    className="subpage-cus",
                 )
             ],
             className="page",
