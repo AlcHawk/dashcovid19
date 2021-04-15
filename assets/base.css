@@ -426,6 +426,11 @@ body {
   margin-top: 30px;
 }
 
+.page-cus1a {
+  border-left: 30px;
+  margin-top: 20px;
+}
+
  @page {
 	  size: A4;
 	  margin: 0;

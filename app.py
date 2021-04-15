@@ -23,13 +23,15 @@ BASE_PATH = pathlib.Path(__file__).parent.resolve()
 DATA_PATH = BASE_PATH.joinpath("Data").resolve()
 
 #%%
-## Read in data
+## Read in data from the data source of CDC press and COVID-19 in TW
 
 pressLst = pd.read_excel(DATA_PATH.joinpath(f"CDC_Press List.xlsx"), keep_default_na=False, infer_datetime_format=True)
 pressTDY = pressLst.loc[pressLst["YMD"] == pressLst.iloc[0, 2]]
 
 cases = pd.read_excel(DATA_PATH.joinpath("COVID-19_TW.xlsx"), keep_default_na=False, parse_dates=[1], infer_datetime_format=True)
-cases_filter = cases.loc[cases["案例"] != ""]
+
+# Generate pivotal table for the histogram summary
+cases_filter = cases.loc[(cases["案例"] != "") & (~cases["新聞稿發布日期"].isna())]
 caseTDS = pd.crosstab(index=cases_filter["來源"], columns=["人次"], rownames=["來源"])
 caseTDS.reset_index(level=0, inplace=True)
 caseTDS = caseTDS.sort_values(by=["人次"], ascending=False)
@@ -47,7 +49,9 @@ caseDayDS["累積人次"] = caseDayDS["人次"].cumsum()
 caseDayDS_Melt = caseDayDS.melt(id_vars=list(caseDayDS.keys()[:2]), var_name='Subject', value_name='人次')
 caseDayDS_Melt["Subject"][caseDayDS_Melt["Subject"] == "人次"] = "新增人次"
 
-# Colours
+sumCOVID19_TW = sum(caseTDS["人次"])
+
+# Set Colour Parameters
 color_1 = "#003399"
 color_2 = "#00ffff"
 color_3 = "#002277"
@@ -55,6 +59,8 @@ color_b = "#F8F8FF"
 
 
 #%%
+
+# Define report paragraph format for CDC press
 
 paraLN = pressTDY.shape[0]
 paraGN = paraLN / 2
@@ -64,6 +70,10 @@ if paraGN <= 1:
 elif 1 < paraGN <= 2:
     para1N = 2
     para2N = int((paraGN - 1) * 2)
+elif paraGN > 2:
+    para1N = 2
+    para2N = 2
+
 
 paragLst = [html.H6("疫情指揮中心 最新新聞稿", className="page-1i"),]
 for pressN in range(para1N):
@@ -106,7 +116,9 @@ if paraGN > 1 :
             paragLst2.extend( [html.Div(iniLst2, className="page-1l", )] )
 
 
-## Figure
+## Set Figure style for the summary
+
+# Daily incidence trend of COVID-19 case in Taiwan
 fig_dayInc_scale = 150
 fig_dayInc = px.line(
             caseDayDS_Melt,
@@ -147,13 +159,14 @@ fig_dayInc.update_layout(
 
 # fig_dayInc.show()
 
-
+# Histogram of COVID-19 case in Taiwan
 fig_src_scale = 100
 fig_src = px.bar(
             caseTDS,
             x="來源", y="人次",
             text="人次",
             # labels={'來源': 'Source', '人次':'Number of Subject'},
+            labels={'來源': f'來源 (總計：{sumCOVID19_TW} 人)'},
             # title="確診人次統計",
             title={
                     'text': "確診人次統計",
@@ -288,7 +301,7 @@ app.layout = html.Div(
                                 # ),
                                 dcc.Graph(figure=fig_src)
                             ],
-                            className="page-3",
+                            className="page-cus1a",
                         ),
                     ],
                     className="subpage",
