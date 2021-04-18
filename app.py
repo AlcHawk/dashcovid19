@@ -54,6 +54,10 @@ sumCOVID19_TW = sum(caseTDS["人次"])
 # Vaccine Analysis Print of Oxford University/AstraZeneca
 VCAP_AZ = pd.read_excel(DATA_PATH.joinpath("VaccineAnalysisPrint.xlsx"), sheet_name="OxAstraZeneca",keep_default_na=False, parse_dates=[1], infer_datetime_format=True)
 
+VCAP_AZ_THROMB = pd.read_excel(DATA_PATH.joinpath("VaccineAnalysisPrint-possible clotting terms.xlsx"), sheet_name="OxAstraZeneca",keep_default_na=False, parse_dates=[1], infer_datetime_format=True)
+VCAP_AZ_THROMB = VCAP_AZ_THROMB[VCAP_AZ_THROMB["Reaction Name"] != ""]
+
+Thromb_List = 
 
 # Set Colour Parameters
 color_1 = "#003399"
