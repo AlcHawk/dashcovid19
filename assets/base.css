@@ -453,10 +453,22 @@ body {
   margin-top: 10px;
 }
 
-.page-cus3-2 {
-  border-left: 30px;
-  margin-top: 20px;
+.page-cus3-2a {
+  /* width: 300px; */
+  /* float: left; */
+  text-align: justify;
+  border-left: 15px;
+  margin-top: 10px;
 }
+
+.page-cus3-2b {
+  /* width: 300px; */
+  /* float: right; */
+  text-align: justify;
+  border-left: 15spx;
+  margin-top: 10px;
+}
+
 
  @page {
 	  size: A4;
