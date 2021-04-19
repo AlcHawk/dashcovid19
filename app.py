@@ -61,6 +61,12 @@ Thromb_List = pd.unique(VCAP_AZ_THROMB["PT"])
 
 VCAP_AZ_CLOT = VCAP_AZ[VCAP_AZ["PT"].isin(Thromb_List)]
 
+# Vaccine Analysis Print of Pfizer/BioNTech
+VCAP_BNT = pd.read_excel(DATA_PATH.joinpath("VaccineAnalysisPrint.xlsx"), sheet_name="PfizerBNT",keep_default_na=False, parse_dates=[1], infer_datetime_format=True)
+
+VCAP_BNT_CLOT = VCAP_BNT[VCAP_BNT["PT"].isin(Thromb_List)]
+
+
 # Set Colour Parameters
 color_1 = "#003399"
 color_2 = "#00ffff"
@@ -233,6 +239,36 @@ fig_VCAP_OxAZ_Clot = px.sunburst(
 
 # fig_VCAP_OxAZ.show()
 
+# Summary for Vaccine Analysis Print - Pfizer/BNT
+
+BNT_RE_N = VCAP_BNT["Total"].sum()
+
+fig_VCAP_PfBNT = px.treemap(
+            VCAP_BNT,
+            path=['SOC', 'PT', 'Reaction Name'],
+            values='Total',
+            color='SOC',
+            hover_data=['Total'],
+            title={
+                    'text': f"BNT COVID Vaccine AEs (Total N={BNT_RE_N}) - SOC/PT/Reaction Name"
+                },
+            height=450
+            )
+
+BNT_CLOT_N = VCAP_BNT_CLOT["Total"].sum()
+
+fig_VCAP_PfBNT_Clot = px.sunburst(
+            VCAP_BNT_CLOT,
+            path=['SOC', 'PT', 'Reaction Name'],
+            values='Total',
+            title={
+                    'text': f"BNT COVID Vaccine AEs (Possible Clotting N={BNT_CLOT_N}) - SOC/PT/Reaction Name"
+                },
+            height=350
+            )
+
+# fig_VCAP_PfBNT.show()
+
 
 #%%
 # Server
@@ -377,6 +413,32 @@ app.layout = html.Div(
                         html.Div(
                             [   
                                 dcc.Graph(figure=fig_VCAP_OxAZ_Clot)
+                            ],
+                            className="page-cus3-2b",
+                        ),
+                    ],
+                    className="subpage-cus",
+                )
+            ],
+            className="page",
+        ),
+
+        # Page 4
+        html.Div(
+            [
+                html.Div(
+                    [
+                        html.Div([html.H1("Vaccine Analysis Print - Pfizer/BNT")], className="page-cus2a"),
+                        html.Div(
+                            [   
+                                dcc.Graph(figure=fig_VCAP_PfBNT)
+                            ],
+                            className="page-cus3-2a",
+                        ),
+
+                        html.Div(
+                            [   
+                                dcc.Graph(figure=fig_VCAP_PfBNT_Clot)
                             ],
                             className="page-cus3-2b",
                         ),
