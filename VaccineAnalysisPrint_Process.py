@@ -4,7 +4,7 @@ import tabula
 from tabula import convert_into
 import os
 import pandas as pd
-import xlsxwriter
+import xlsxwriter, openpyxl
 
 # tabula.environment_info()
 
