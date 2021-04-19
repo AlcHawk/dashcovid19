@@ -196,15 +196,28 @@ fig_src.update_traces(marker_color='green', textposition='auto')
 
 AZ_RE_N = VCAP_AZ["Total"].sum()
 
-fig_VCAP_OxAZ = px.sunburst(
+# fig_VCAP_OxAZ = px.sunburst(
+#             VCAP_AZ,
+#             path=['SOC', 'PT', 'Reaction Name'],
+#             values='Total',
+#             title={
+#                     'text': f"AZ COVID Vaccine AEs (Total N={AZ_RE_N}) - SOC/PT/Reaction Name"
+#                 },
+#             height=400
+#             )
+
+fig_VCAP_OxAZ = px.treemap(
             VCAP_AZ,
             path=['SOC', 'PT', 'Reaction Name'],
             values='Total',
+            color='SOC',
+            hover_data=['Total'],
             title={
                     'text': f"AZ COVID Vaccine AEs (Total N={AZ_RE_N}) - SOC/PT/Reaction Name"
                 },
-            height=400
+            height=450
             )
+
 
 AZ_CLOT_N = VCAP_AZ_CLOT["Total"].sum()
 
@@ -215,7 +228,7 @@ fig_VCAP_OxAZ_Clot = px.sunburst(
             title={
                     'text': f"AZ COVID Vaccine AEs (Possible Clotting N={AZ_CLOT_N}) - SOC/PT/Reaction Name"
                 },
-            height=400
+            height=350
             )
 
 # fig_VCAP_OxAZ.show()
