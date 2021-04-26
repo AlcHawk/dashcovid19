@@ -82,6 +82,20 @@ def djson2df(inJSONDict, inLabel):
     
     json_ds["iso_code"] = inLabel
 
+    substrList = ['date', "cases"]
+    colList = list(json_ds.columns)
+
+    filter_column = [colStr for colStr in colList if any(subStr in colStr for subStr in substrList)]
+
+    column_order = ['iso_code',
+                    'continent',
+                    'location',
+                    'population'
+                    ]
+    column_order = column_order + filter_column
+
+    json_ds = json_ds.reindex(columns=column_order)
+
     return json_ds
     
 
@@ -176,7 +190,7 @@ fig_dayInc.update_xaxes(
     showgrid=True,
     tickangle=45,
     tickfont=dict(size=12),
-    rangeslider_visible=True,
+    # rangeslider_visible=True,
     rangeselector=dict(
         buttons=list([
             dict(count=3, label="3m", step="month", stepmode="backward"),
