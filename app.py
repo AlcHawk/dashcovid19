@@ -11,7 +11,7 @@ import pandas as pd
 import lorem
 import pathlib
 
-import datetime
+import datetime, requests, json
 
 today = datetime.date.today()
 tdy = str(today).replace("-", "")
@@ -65,6 +65,28 @@ VCAP_AZ_CLOT = VCAP_AZ[VCAP_AZ["PT"].isin(Thromb_List)]
 VCAP_BNT = pd.read_excel(DATA_PATH.joinpath("VaccineAnalysisPrint.xlsx"), sheet_name="PfizerBNT",keep_default_na=False, parse_dates=[1], infer_datetime_format=True)
 
 VCAP_BNT_CLOT = VCAP_BNT[VCAP_BNT["PT"].isin(Thromb_List)]
+
+# Our World in Data for COVID-19
+
+owidurl = "https://covid.ourworldindata.org/data/owid-covid-data.json"
+owiddata_json = requests.get(owidurl)
+owiddata = json.loads(owiddata_json.text)
+
+def djson2df(inJSONDict, inLabel):
+
+    json_ds = pd.json_normalize(inJSONDict[inLabel],
+                        record_path="data",
+                        meta=["continent", "location", "population"],
+                        errors='ignore'
+                    )
+    
+    json_ds["iso_code"] = inLabel
+
+    return json_ds
+    
+
+owid_map = map(djson2df, owiddata, owiddata.keys())
+owid_data = pd.concat(owid_map)
 
 
 # Set Colour Parameters
