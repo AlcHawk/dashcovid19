@@ -85,7 +85,7 @@ def djson2df(inJSONDict, inLabel):
     return json_ds
     
 
-owid_map = map(djson2df, owiddata, owiddata.keys())
+owid_map = map(lambda x: djson2df(inJSONDict=owiddata, inLabel=x), owiddata.keys())
 owid_data = pd.concat(owid_map)
 
 
