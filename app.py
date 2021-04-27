@@ -68,39 +68,39 @@ VCAP_BNT_CLOT = VCAP_BNT[VCAP_BNT["PT"].isin(Thromb_List)]
 
 # Our World in Data for COVID-19
 
-owidurl = "https://covid.ourworldindata.org/data/owid-covid-data.json"
-owiddata_json = requests.get(owidurl)
-owiddata = json.loads(owiddata_json.text)
+# owidurl = "https://covid.ourworldindata.org/data/owid-covid-data.json"
+# owiddata_json = requests.get(owidurl)
+# owiddata = json.loads(owiddata_json.text)
 
-def djson2df(inJSONDict, inLabel):
+# def djson2df(inJSONDict, inLabel):
 
-    json_ds = pd.json_normalize(inJSONDict[inLabel],
-                        record_path="data",
-                        meta=["continent", "location", "population"],
-                        errors='ignore'
-                    )
+#     json_ds = pd.json_normalize(inJSONDict[inLabel],
+#                         record_path="data",
+#                         meta=["continent", "location", "population"],
+#                         errors='ignore'
+#                     )
     
-    json_ds["iso_code"] = inLabel
+#     json_ds["iso_code"] = inLabel
 
-    substrList = ['date', "cases"]
-    colList = list(json_ds.columns)
+#     substrList = ['date', "cases"]
+#     colList = list(json_ds.columns)
 
-    filter_column = [colStr for colStr in colList if any(subStr in colStr for subStr in substrList)]
+#     filter_column = [colStr for colStr in colList if any(subStr in colStr for subStr in substrList)]
 
-    column_order = ['iso_code',
-                    'continent',
-                    'location',
-                    'population'
-                    ]
-    column_order = column_order + filter_column
+#     column_order = ['iso_code',
+#                     'continent',
+#                     'location',
+#                     'population'
+#                     ]
+#     column_order = column_order + filter_column
 
-    json_ds = json_ds.reindex(columns=column_order)
+#     json_ds = json_ds.reindex(columns=column_order)
 
-    return json_ds
+#     return json_ds
     
 
-owid_map = map(lambda x: djson2df(inJSONDict=owiddata, inLabel=x), owiddata.keys())
-owid_data = pd.concat(owid_map)
+# owid_map = map(lambda x: djson2df(inJSONDict=owiddata, inLabel=x), owiddata.keys())
+# owid_data = pd.concat(owid_map)
 
 
 # Set Colour Parameters
