@@ -20,15 +20,16 @@ tdy = time.strftime("%Y%m%d")
 
 #%% Download Integrated Data Information by Someone from Google Spreadsheet
 
-srcUrl = 'https://docs.google.com/spreadsheets/d/1qh20J-5rGVIEjLcGKJnfj7huAp-nCxsd-fJdmh3yZKY/export?gid=0&format=xlsx'
+# =====> Deactivate the download due to access restriction (need to find other data sources)
+# srcUrl = 'https://docs.google.com/spreadsheets/d/1qh20J-5rGVIEjLcGKJnfj7huAp-nCxsd-fJdmh3yZKY/export?gid=0&format=xlsx'
 
-out_fname = f'{rootdir}/Data/COVID-19_TW.xlsx'
+# out_fname = f'{rootdir}/Data/COVID-19_TW.xlsx'
 
-res = requests.get(srcUrl)
-res.encoding = 'utf-8'
+# res = requests.get(srcUrl)
+# res.encoding = 'utf-8'
 
-with open(out_fname, 'wb') as f:
-    f.write(res.content)
+# with open(out_fname, 'wb') as f:
+#     f.write(res.content)
 
 
 # %% Run Demo - Get Press Release List from CDC
